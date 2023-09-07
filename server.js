@@ -57,6 +57,17 @@ app.get('/logs/:id', async(req, res) => {
         console.log(error, 'Log not found!!')
     }
 })
+
+app.delete('/api/logs/:id', async(req, res)=> {
+    const { id } = req.params
+    try {
+        const logToBeDeleted = await Log.findByIdAndDelete(id)
+        res.redirect('/logs')
+    } catch (error) {
+        console.log(error, "Log not found!")
+    }
+})
+
 //* Database connection
 databaseConnection()
 

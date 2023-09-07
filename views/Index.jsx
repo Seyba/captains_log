@@ -11,6 +11,9 @@ const Index = (props) => {
                         return(
                             <li key={log._id}>
                                 <a href={`/logs/${log._id}`}>{log.title}</a>
+                                <form method="POST" action={`/api/logs/${log._id}?_method=DELETE`}>
+                                    <input type="submit" value="Delete Log"/>
+                                </form>
                             </li>
                         )
                     })
