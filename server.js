@@ -3,6 +3,7 @@ require('dotenv').config()
 const jsxEngine = require('jsx-view-engine')
 const databaseConnection = require('./config/database')
 const methodOverride = require('method-override')
+const Log = require('./models/logs')
 
 const app = express()
 const port = 3000
@@ -28,11 +29,17 @@ app.get('/', (req, res) => {
 app.get('/logs', (req, res) => {
     res.render('New')
 })
-app.post('/logs', (req, res) => {
+app.post('/logs', async (req, res) => {
     if(req.body.shipIsBroken == 'on'){
         req.body.shipIsBroken = true
     } else {
         req.body.shipIsBroken = false
+    }
+    try {
+        const newLog = await Log.create(req.body)
+        res.render('Show')
+    } catch (error) {
+        console.log(error, 'log not created')
     }
     res.send(req.body)
 })
