@@ -22,11 +22,16 @@ app.use(express.json())
 app.use(methodOverride('_method'))
 
 
-app.get('/', (req, res) => {
-    res.send('Captains log App.')
+app.get('/logs', async (req, res) => {
+    try {
+        const logs = await Log.find({})
+        res.render('Index', {logs})
+    } catch (error) {
+        console.log(error, 'Data not found!')
+    }
 })
 
-app.get('/logs', (req, res) => {
+app.get('/logs/new', (req, res) => {
     res.render('New')
 })
 app.post('/logs', async (req, res) => {
@@ -42,6 +47,15 @@ app.post('/logs', async (req, res) => {
         console.log(error, 'log not created')
     }
     res.send(req.body)
+})
+app.get('/logs/:id', async(req, res) => {
+    const { id } = req.params
+    try {
+        const log = await Log.findById(id)
+        res.render('Show', {log})
+    } catch (error) {
+        console.log(error, 'Log not found!!')
+    }
 })
 //* Database connection
 databaseConnection()
