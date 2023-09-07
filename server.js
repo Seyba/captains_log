@@ -25,10 +25,17 @@ app.get('/', (req, res) => {
     res.send('Captains log App.')
 })
 
-app.get('/new', (req, res) => {
+app.get('/logs', (req, res) => {
     res.render('New')
 })
-
+app.post('/logs', (req, res) => {
+    if(req.body.shipIsBroken == 'on'){
+        req.body.shipIsBroken = true
+    } else {
+        req.body.shipIsBroken = false
+    }
+    res.send(req.body)
+})
 //* Database connection
 databaseConnection()
 

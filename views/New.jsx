@@ -8,7 +8,7 @@ const New = () => {
                 <label>Title: </label>
                 <input type="text" name="title"/>
                 <labe>Entry:</labe>
-                <textarea type="text" name="entry"></textarea>
+                <textarea name="entry"></textarea>
                 <label>Is Ship Broken? </label>
                 <input type="checkbox" name="shipIsBroken"/>
                 <input type="submit" value="Submit Log"/>
