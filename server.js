@@ -4,6 +4,7 @@ const jsxEngine = require('jsx-view-engine')
 const databaseConnection = require('./config/database')
 const methodOverride = require('method-override')
 const Log = require('./models/logs')
+const manyLogs = require('./models/manyLogs')
 
 const app = express()
 const port = 3000
@@ -90,6 +91,14 @@ app.put('/api/logs/:id', async(req, res) => {
         res.redirect('/logs')
     } catch (error) {
         console.log(error, 'log not updated!!')
+    }
+})
+app.post('/api/logs/seed', async(req, res) => {
+    try {
+        const data = await Log.insertMany(manyLogs)
+        res.redirect('/logs')
+    } catch (error) {
+        console.log(error, 'Oops something went wrong!!')
     }
 })
 
