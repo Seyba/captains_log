@@ -34,6 +34,17 @@ app.get('/logs', async (req, res) => {
 app.get('/logs/new', (req, res) => {
     res.render('New')
 })
+
+app.get('/logs/:id/edit', async(req, res) => {
+    const { id } = req.params
+    try {
+        const log = await Log.findById(id)
+        res.render('Edit', { log})
+    } catch (error) {
+        console.log(error, 'Log not found!')
+    }
+})
+
 app.post('/logs', async (req, res) => {
     if(req.body.shipIsBroken == 'on'){
         req.body.shipIsBroken = true
@@ -42,17 +53,16 @@ app.post('/logs', async (req, res) => {
     }
     try {
         const newLog = await Log.create(req.body)
-        res.render('Show')
+        res.redirect('/logs')
     } catch (error) {
         console.log(error, 'log not created')
     }
-    res.send(req.body)
 })
 app.get('/logs/:id', async(req, res) => {
     const { id } = req.params
     try {
         const log = await Log.findById(id)
-        res.render('Show', {log})
+        res.render('Show', { log })
     } catch (error) {
         console.log(error, 'Log not found!!')
     }
@@ -65,6 +75,21 @@ app.delete('/api/logs/:id', async(req, res)=> {
         res.redirect('/logs')
     } catch (error) {
         console.log(error, "Log not found!")
+    }
+})
+app.put('/api/logs/:id', async(req, res) => {
+    const { id } = req.params
+    if(req.body.shipIsBroken === 'on'){
+        req.body.shipIsBroken = true 
+    } else {
+        req.body.shipIsBroken = false
+    }
+    try {
+        const updatedLog = await Log.findByIdAndUpdate(id, req.body,{new: true})
+        //res.send(updatedLog)
+        res.redirect('/logs')
+    } catch (error) {
+        console.log(error, 'log not updated!!')
     }
 })
 
