@@ -1,10 +1,11 @@
 const React = require('react')
+const DefaultLayout = require('./default/default')
 
 const Index = (props) => {
     const { logs } = props
     return(
-        <main>
-            <h2>Captians Log</h2>
+        <DefaultLayout title="Captains Log">
+            
             <a href="/logs/new">Create a New Log</a>
             <ul>
                 {
@@ -22,7 +23,7 @@ const Index = (props) => {
                     })
                 }
             </ul>
-        </main>
+        </DefaultLayout>
     )
 }
 module.exports = Index
