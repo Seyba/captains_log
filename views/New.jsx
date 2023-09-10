@@ -4,7 +4,7 @@ const DefaultLayout = require('./default/default')
 const New = () => {
     return(
         <DefaultLayout title="Create New Log">
-            <form action="/logs" method="POST">
+            <form className="w-1/2" action="/logs" method="POST">
             
                 <div className="mt-2">                
                     <label className="block text-sm font-medium leading-6 text-gray-900">
@@ -14,7 +14,7 @@ const New = () => {
                         <input 
                             type="text" 
                             name="title"
-                            className="block flex-1 shadow-sm border-0 bg-transparent rounded-md ring-1 ring-inset ring-gray-300 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                            className="block w-full flex-1 shadow-sm border-0 bg-transparent rounded-md ring-1 ring-inset ring-gray-300 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                             placeholder="enter title"
 
                         />
@@ -35,11 +35,15 @@ const New = () => {
                 <label>Is Ship Broken? </label>
                 <input type="checkbox" name="shipIsBroken"/>
                 
-                <input 
-                    type="submit" 
-                    value="Submit Log"
-                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                />
+                <div>
+                    <input 
+                        type="submit" 
+                        value="Submit Log"
+                        className="rounded-md bg-blue-900 px-2.5 py-1.5 text-sm font-semibold text-slate-100 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-blue-700"
+                    />
+                </div>
+                
+                
             </form>
         </DefaultLayout>
     )
